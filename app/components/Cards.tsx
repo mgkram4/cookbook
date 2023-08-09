@@ -12,14 +12,36 @@ async function getData() {
 }
 
 export default async function Card() {
-  const data = (await getData()) as Post[];
+  const data = await getData();
 
   return (
     <ul>
       {data.map(
-        (
-          post // Added parentheses around the map function
-        ) => (
+        (post: {
+          _id: React.Key | null | undefined;
+          image: { asset: any };
+          title:
+            | string
+            | number
+            | boolean
+            | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+            | Iterable<React.ReactNode>
+            | React.ReactPortal
+            | React.PromiseLikeOfReactNode
+            | null
+            | undefined;
+          overview:
+            | string
+            | number
+            | boolean
+            | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+            | Iterable<React.ReactNode>
+            | React.ReactPortal
+            | React.PromiseLikeOfReactNode
+            | null
+            | undefined;
+          slug: { current: any };
+        }) => (
           <li key={post._id}>
             <div className="card w-96 bg-base-100 shadow-xl">
               <figure>
