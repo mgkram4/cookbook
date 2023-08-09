@@ -1,7 +1,7 @@
 import Hero from "./components/Hero";
 import Grid from "./components/Grid";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <Hero />
