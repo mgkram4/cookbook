@@ -1,4 +1,3 @@
-import React from "react";
 import { Post } from "../lib/interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
@@ -11,40 +10,17 @@ async function getData() {
   return data;
 }
 
-export default async function Card() {
-  const data = await getData();
+export default async function ProjModal() {
+  try {
+    const data = (await getData()) as Post[];
 
-  return (
-    <ul>
-      {data.map(
-        (post: {
-          _id: React.Key | null | undefined;
-          image: { asset: any };
-          title:
-            | string
-            | number
-            | boolean
-            | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-            | Iterable<React.ReactNode>
-            | React.ReactPortal
-            | React.PromiseLikeOfReactNode
-            | null
-            | undefined;
-          overview:
-            | string
-            | number
-            | boolean
-            | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-            | Iterable<React.ReactNode>
-            | React.ReactPortal
-            | React.PromiseLikeOfReactNode
-            | null
-            | undefined;
-          slug: { current: any };
-        }) => (
-          <li key={post._id}>
-            <div className="card w-96 bg-base-100 shadow-xl">
-              <figure>
+    return (
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
+        {data.map((post: Post) => (
+          <Link key={post._id} href={`/post/${post.slug.current}`}>
+            <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 h-full ">
+              <div className="">
+                {/* Use appropriate height for the image container */}
                 {post.image?.asset && (
                   <Image
                     className="rounded-xl mt-4"
@@ -61,20 +37,22 @@ export default async function Card() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                   />
                 )}
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{post.title}</h2>
-                <p>{post.overview}</p>
-                <div className="card-actions justify-end">
-                  <Link href={`/post/${post.slug.current}`}>
-                    <button className="btn btn-primary">Learn More</button>
-                  </Link>
+              </div>
+              <div className="flex flex-col justify-between p-4 leading-normal">
+                <div className="flex text-center font-bold justify-center mt-2">
+                  {post.title}
                 </div>
+                <p className="flex text-center justify-center">
+                  {post.overview}
+                </p>
               </div>
             </div>
-          </li>
-        )
-      )}
-    </ul>
-  );
+          </Link>
+        ))}
+      </div>
+    );
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    // You can add some fallback UI or return an error message here
+  }
 }
