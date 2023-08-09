@@ -10,7 +10,7 @@ async function getData() {
   return data;
 }
 
-export default async function ProjModal() {
+export default async function Card() {
   try {
     const data = (await getData()) as Post[];
 
