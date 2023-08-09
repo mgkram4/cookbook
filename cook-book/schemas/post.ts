@@ -1,7 +1,7 @@
 export default {
   name: 'post',
   type: 'document',
-  title: 'Post', // Capitalized 'Post' for consistency
+  title: 'post',
   fields: [
     {
       name: 'title',
@@ -14,12 +14,6 @@ export default {
       title: 'Overview',
     },
     {
-      name: 'content',
-      type: 'array',
-      title: 'Content',
-      of: [{type: 'block'}], // Specify the type of blocks in the array
-    },
-    {
       name: 'slug',
       type: 'slug',
       title: 'Slug',
@@ -29,14 +23,34 @@ export default {
     },
     {
       name: 'image',
-      type: 'image',
-      title: 'Image',
+      type: 'image', // Change 'Image' to 'image'
+      title: 'Image', // Capitalize the first letter for consistency
       options: {hotspot: true},
       fields: [
         {
           name: 'alt',
           title: 'Alt',
           type: 'string',
+        },
+      ],
+    },
+    {
+      name: 'content',
+      type: 'array',
+      title: 'Content',
+      of: [
+        {
+          type: 'block',
+        },
+        {
+          type: 'image',
+          fields: [
+            {
+              type: 'text',
+              name: 'alt',
+              title: 'Alternative Text',
+            },
+          ],
         },
       ],
     },
