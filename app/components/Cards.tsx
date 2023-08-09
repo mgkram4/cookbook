@@ -1,4 +1,3 @@
-import React from "react";
 import { Post } from "../lib/interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
@@ -22,24 +21,22 @@ export default async function Card() {
         ) => (
           <li key={post._id}>
             <div className="card w-96 bg-base-100 shadow-xl">
-              <figure>
-                {post.image?.asset && (
-                  <Image
-                    className="rounded-xl mt-4"
-                    src={urlFor(post.image).url()}
-                    alt="logos"
-                    width={100}
-                    height={100}
-                    placeholder="blur"
-                    blurDataURL={urlFor(post.image)
-                      .width(24)
-                      .height(24)
-                      .blur(10)
-                      .url()}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                  />
-                )}
-              </figure>
+              {post.image?.asset && (
+                <Image
+                  className="rounded-xl mt-4"
+                  src={urlFor(post.image).url()}
+                  alt="logos"
+                  width={100}
+                  height={100}
+                  placeholder="blur"
+                  blurDataURL={urlFor(post.image)
+                    .width(24)
+                    .height(24)
+                    .blur(10)
+                    .url()}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                />
+              )}
               <div className="card-body">
                 <h2 className="card-title">{post.title}</h2>
                 <p>{post.overview}</p>
