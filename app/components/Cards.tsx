@@ -1,4 +1,4 @@
-import React from "react"; // Make sure to import React
+import React from "react";
 import { Post } from "../lib/interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
@@ -41,9 +41,8 @@ export default async function Card() {
                 )}
               </figure>
               <div className="card-body">
-                <h2 className="card-title">{post.title}</h2>{" "}
-                {/* Use dynamic data from 'post' */}
-                <p>{post.overview}</p> {/* Use dynamic data from 'post' */}
+                <h2 className="card-title">{post.title}</h2>
+                <p>{post.overview}</p>
                 <div className="card-actions justify-end">
                   <Link href={`/post/${post.slug.current}`}>
                     <button className="btn btn-primary">Learn More</button>
