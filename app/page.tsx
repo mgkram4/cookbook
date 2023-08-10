@@ -3,7 +3,7 @@ import Grid from "./components/Grid";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <Hero />
       <Grid />
     </div>

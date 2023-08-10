@@ -14,13 +14,13 @@ export default async function Card() {
   const data = (await getData()) as Post[];
 
   return (
-    <ul>
+    <div className="flex flex-col items-center justify-center ">
       {data.map((post: Post) => (
-        <li key={post._id}>
-          <div className="card w-96 bg-base-100 shadow-xl">
+        <div key={post._id}>
+          <div className="card w-96  border-2 shadow-md">
             {post.image?.asset && (
               <Image
-                className="rounded-xl mt-4"
+                className="ml-36 mt-4"
                 src={urlFor(post.image).url()}
                 alt="logos"
                 width={100}
@@ -34,18 +34,20 @@ export default async function Card() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               />
             )}
-            <div className="card-body">
+            <div className="card-body ">
               <h2 className="card-title">{post.title}</h2>
               <p>{post.overview}</p>
               <div className="card-actions justify-end">
                 <Link href={`/post/${post.slug.current}`}>
-                  <button className="btn btn-primary">Learn More</button>
+                  <button className="btn bg-tan-10 hover:bg-red-500">
+                    Learn More
+                  </button>
                 </Link>
               </div>
             </div>
           </div>
-        </li>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 }
