@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient, groq } from "next-sanity";
 
 const projectId = "a0leql2n";
 const dataset = "production";

@@ -14,39 +14,37 @@ export default async function Card() {
   const data = (await getData()) as Post[];
 
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 justify-center">
       {data.map((post: Post) => (
-        <div key={post._id}>
-          <div className="card w-96  border-2 shadow-md">
-            {post.image?.asset && (
-              <Image
-                className="ml-36 mt-4"
-                src={urlFor(post.image).url()}
-                alt="logos"
-                width={100}
-                height={100}
-                placeholder="blur"
-                blurDataURL={urlFor(post.image)
-                  .width(24)
-                  .height(24)
-                  .blur(10)
-                  .url()}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-              />
-            )}
-            <div className="card-body ">
-              <h2 className="card-title">{post.title}</h2>
-              <p>{post.overview}</p>
-              <div className="card-actions justify-end">
-                <Link href={`/post/${post.slug.current}`}>
-                  <button className="btn bg-tan-10 hover:bg-red-500">
-                    Learn More
-                  </button>
-                </Link>
+        <Link key={post._id} href={`/post/${post.slug.current}`}>
+          <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 h-full ">
+            <div className="">
+              {/* Use appropriate height for the image container */}
+              {post.image?.asset && (
+                <Image
+                  className="rounded-xl mt-4"
+                  src={urlFor(post.image).url()}
+                  alt="logos"
+                  width={100}
+                  height={100}
+                  placeholder="blur"
+                  blurDataURL={urlFor(post.image)
+                    .width(24)
+                    .height(24)
+                    .blur(10)
+                    .url()}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                />
+              )}
+            </div>
+            <div className="flex flex-col justify-between p-4 leading-normal">
+              <div className="flex text-center font-bold justify-center mt-2">
+                {post.title}
               </div>
+              <p className="flex text-center justify-center">{post.overview}</p>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );
